@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"; //nanoid genererer et random id-nummer
 
-const initialState = /*{
-  darkTheme: false,
-  posts: */ [
+const initialState = [
   {
     id: "1",
     title: "Første post",
@@ -23,8 +21,7 @@ const initialState = /*{
     title: "Fjerde post",
     body: "Ved at tilføje en ny post, vil den blive vist øverst i listen, men forsvinder ved reload af browser.",
   },
-]; /*,
-}*/
+];
 
 const postSlice = createSlice({
   name: "posts",
@@ -47,9 +44,6 @@ const postSlice = createSlice({
       const postId = action.payload;
       return state.filter((post) => post.id !== postId);
     },
-    /*toggleDarkTheme(state) {
-      state.darkTheme = !state.darkTheme;
-    },*/
   },
 });
 

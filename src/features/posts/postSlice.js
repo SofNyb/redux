@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"; //nanoid genererer et random id-nummer
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
   {

@@ -10,17 +10,20 @@ const AddPostForm = ({ closeModal }) => {
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [userId, setUserId] = useState(""); // [1, 2, 3, 4
   const [error, setError] = useState(null);
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onBodyChanged = (e) => setBody(e.target.value);
+  const onUserIdChanged = (e) => setUserId(e.target.value);
 
   const onSavePostClicked = () => {
-    if (title.trim() !== "" && body.trim() !== "") {
-      dispatch(postAdded(title, body));
+    if (title.trim() !== "" && body.trim() !== "" && userId !== "") {
+      dispatch(postAdded(title, body, userId));
 
       setTitle(""); //denne linje og dem under sætter staten tilbage til tom
       setBody("");
+      setUserId("");
       setError(null);
       closeModal();
     } else {
@@ -47,6 +50,17 @@ const AddPostForm = ({ closeModal }) => {
         value={body}
         onChange={onBodyChanged}
       />
+      <br />
+      <br />
+      <select id="users" value={userId} onChange={onUserIdChanged}>
+        <option value="" disabled>
+          Vælg en bruger
+        </option>
+        <option value="1">Emma Nielsen</option>
+        <option value="2">Alexander Madsen</option>
+        <option value="3">Lucas Pedersen</option>
+        <option value="4">Isabella Andersen</option>
+      </select>
       <br />
       <br />
       <button className="add" type="button" onClick={onSavePostClicked}>

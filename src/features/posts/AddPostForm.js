@@ -1,12 +1,15 @@
 import { useState } from "react";
 //title og body bruger useState, fordi det kun skal bruges i denne component
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { postAdded } from "./postSlice";
 
+import { selectAllUsers } from "../users/usersSlice";
+
 const AddPostForm = ({ closeModal }) => {
   const dispatch = useDispatch();
+  const users = useSelector(selectAllUsers);
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -30,6 +33,12 @@ const AddPostForm = ({ closeModal }) => {
       setError("Alle felter skal udfyldes.");
     }
   };
+
+  const usersOptions = users.map((user) => (
+    <option key={user.userId} value={user.userId}>
+      {user.name}
+    </option>
+  ));
 
   return (
     <form>
@@ -56,10 +65,14 @@ const AddPostForm = ({ closeModal }) => {
         <option value="" disabled>
           Vælg en bruger
         </option>
-        <option value="1">Emma Nielsen</option>
-        <option value="2">Alexander Madsen</option>
-        <option value="3">Lucas Pedersen</option>
-        <option value="4">Isabella Andersen</option>
+        {usersOptions}
+        {/*
+          <option value="1">Emma Nielsen</option>
+          <option value="2">Alexander Madsen</option>
+          <option value="3">Lucas Pedersen</option>
+          <option value="4">Isabella Andersen</option>
+          <option value="5">Sofie Jensen</option>
+          */}
       </select>
       <br />
       <br />

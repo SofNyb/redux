@@ -22,21 +22,27 @@ const initialState = [
 const usersSlice = createSlice({
   name: "users",
   initialState,
-  /*reducers: {
+  reducers: {
     userAdded: {
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare(userId, name) {
+      prepare(name, currentId) {
+        const maxId = currentId.reduce(
+          (max, user) => Math.max(max, parseInt(user.userId, 10)),
+          0
+        );
+        const newUserId = (maxId + 1).toString();
+
         return {
           payload: {
-            userId,
+            userId: newUserId,
             name,
           },
         };
       },
     },
-  },*/
+  },
 });
 
 //ved at skrive sådan, kan vi sørge for ikke at skulle rette i alle steder, det bliver brugt, ved ændring af state.
@@ -45,6 +51,6 @@ export const selectAllUsers = (state) => state.users;
 
 //postAdded er en action, som kan bruges i andre filer
 //pga createSlice har lavet action creator function, bliver denne exporteret
-// export const { userAdded } = usersSlice.actions;
+export const { userAdded } = usersSlice.actions;
 
 export default usersSlice.reducer;
